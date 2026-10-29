@@ -8,6 +8,39 @@
 <meta name="author" content="Marie Brache">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23008080'/%3E%3Cpath d='M11 8l13 8-13 8z' fill='%23e8bb3f'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/css/style.css">
+<style>
+  /* About page: RPG dialogue window with a long / short bio menu */
+  .about { align-items: start; }
+  .dialogue.about-window { width: 100%; margin: 18px 0 0; padding: 30px 34px 40px; }
+  .about-window .line { margin: 6px 0 14px; }
+  .bio-choices { list-style: none; margin: 0; padding: 0 0 0 1.4em; display: grid; gap: 6px; }
+  .bio-choices button {
+    font-family: var(--sans); font-weight: 500; font-size: 1rem; line-height: 1.5;
+    color: #f6f3ff; background: none; border: 0; padding: 2px 0; cursor: pointer; text-align: left;
+  }
+  .bio-choices button .wc { font-weight: 400; color: #b9b1d6; }
+  .bio-choices button:hover,
+  .bio-choices button:focus-visible,
+  .bio-choices button[aria-pressed="true"] { color: var(--gold); }
+  .bio-choices button:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .bio-text {
+    margin-top: 20px; padding-top: 20px;
+    border-top: 1px solid rgba(241, 237, 251, 0.28);
+    font-family: var(--serif); font-size: 1.06rem; line-height: 1.75; color: #f1edfb;
+  }
+  .bio-text p { margin: 0 0 1em; }
+  .bio-text p:last-child { margin-bottom: 0; }
+  .bio-text[hidden] { display: none; }
+  .bio-text.show { animation: bio-in 0.3s ease; }
+  @keyframes bio-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .about .contact-line { margin-top: 26px; }
+  @media (max-width: 560px) {
+    .dialogue.about-window { padding: 28px 20px 38px; }
+    .bio-text { font-size: 1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .bio-text.show { animation: none; } }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -27,12 +60,27 @@
   <div class="about">
     <div class="portrait"><img src="assets/img/marie-brache.jpg" width="624" height="865" alt="Portrait of Marie Brache"></div>
     <div>
-      <div class="bio">
-        <p>Marie Brache is a digital media artist and designer based in Oviedo, Florida, whose work moves between two worlds. Such as vibrant character illustration rooted in the role-playing games she loves to practical design that makes technology easier to understand. Her illustrations, from portraits of heroes and adventurers with clean linework and flat, cell-style color with gradient backgrounds. Her design work, from event flyers to instructional booklets, favors strong geometric layouts and high-contrast palettes built in Adobe Photoshop and Illustrator. Her 3D and game work draws on Autodesk 3Ds Max and Unreal Engine.</p><p>As a professional artist starting in 2017, Marie built a wide-ranging career at the University of Central Florida as a graphic design assistant, an IT client support specialist and currently, an administrative assistant. Along the way, she has designed covers for two editions of the Guide to Teaching at UCF, organized faculty events and conferences of up to 200 participants and created a 22-page visual guide that helped prepare faculty for the university’s move to Canvas New Quizzes. She currently works at UCF as of 2026.</p><p>Her personal art is inspired by Final Fantasy, Chrono Trigger, The Legend of Zelda and Elder Scrolls, Marie is passionate about telling stories through characters and the worlds they inhabit. She holds a B.A. in Digital Media - Game Design from UCF and is completing her M.A. in Digital Media. She is developing an original turn-based role-playing game in Unreal Engine that combines low-poly 3D environments with detailed 2D character art.</p>
-      </div>
-      <section class="shortbio" aria-labelledby="short">
-        <h2 id="short">Short bio</h2>
-        <p>Marie Brache is a digital media artist and designer based in Oviedo, Florida, who creates vibrant character illustration inspired by classic role-playing games like Final Fantasy and Chrono Trigger, alongside bold, practical design that makes technology easier to understand. Since 2017 she has worked at the University of Central Florida in design, IT support and administration, creating book covers, event flyers and a 22-page faculty guide to Canvas New Quizzes. She holds a B.A. in Digital Media: Game Design from UCF, is currently completing her M.A. in Digital Media, and is developing her own turn-based role-playing game in Unreal Engine.</p>
+      <section class="dialogue about-window" aria-label="Biography">
+        <p class="speaker">Marie Brache</p>
+        <p class="line">Want the full story, or the quick version?</p>
+        <ul class="bio-choices">
+          <li><button type="button" class="cursor-item" data-bio="long" aria-controls="bio-long" aria-pressed="true">Long bio <span class="wc">(250 words)</span></button></li>
+          <li><button type="button" class="cursor-item" data-bio="short" aria-controls="bio-short" aria-pressed="false">Short bio <span class="wc">(100 words)</span></button></li>
+        </ul>
+
+        <div class="bio-text" id="bio-long">
+          <h2 class="visually-hidden">Long bio</h2>
+          <p>Marie Brache is a digital media artist and designer based in Oviedo, Florida, whose work moves between two worlds. Such as vibrant character illustration rooted in the role-playing games she loves to practical design that makes technology easier to understand. Her illustrations, from portraits of heroes and adventurers with clean linework and flat, cell-style color with gradient backgrounds. Her design work, from event flyers to instructional booklets, favors strong geometric layouts and high-contrast palettes built in Adobe Photoshop and Illustrator. Her 3D and game work draws on Autodesk 3Ds Max and Unreal Engine.</p>
+          <p>As a professional artist starting in 2017, Marie built a wide-ranging career at the University of Central Florida as a graphic design assistant, an IT client support specialist and currently, an administrative assistant. Along the way, she has designed covers for two editions of the Guide to Teaching at UCF, organized faculty events and conferences of up to 200 participants and created a 22-page visual guide that helped prepare faculty for the university’s move to Canvas New Quizzes. She currently works at UCF as of 2026.</p>
+          <p>Her personal art is inspired by Final Fantasy, Chrono Trigger, The Legend of Zelda and Elder Scrolls, Marie is passionate about telling stories through characters and the worlds they inhabit. She holds a B.A. in Digital Media - Game Design from UCF and is completing her M.A. in Digital Media. She is developing an original turn-based role-playing game in Unreal Engine that combines low-poly 3D environments with detailed 2D character art.</p>
+        </div>
+
+        <div class="bio-text" id="bio-short">
+          <h2 class="visually-hidden">Short bio</h2>
+          <p>Marie Brache is a digital media artist and designer based in Oviedo, Florida, who creates vibrant character illustration inspired by classic role-playing games like Final Fantasy and Chrono Trigger, alongside bold, practical design that makes technology easier to understand. Since 2017 she has worked at the University of Central Florida in design, IT support and administration, creating book covers, event flyers and a 22-page faculty guide to Canvas New Quizzes. She holds a B.A. in Digital Media: Game Design from UCF, is currently completing her M.A. in Digital Media, and is developing her own turn-based role-playing game in Unreal Engine.</p>
+        </div>
+
+        <span class="more" aria-hidden="true"></span>
       </section>
       <p class="contact-line">Get in touch: <a href="mailto:mbrache@protonmail.com">mbrache@protonmail.com</a></p>
     </div>
@@ -46,5 +94,31 @@
     <a href="Marie_Brache_CV.pdf">Download CV (PDF)</a>
   </nav>
 </footer>
+<script>
+  /* Pick a bio: the gold cursor moves to the choice and that bio appears in the window.
+     Without JavaScript, both bios simply show one after the other. */
+  (function () {
+    var buttons = document.querySelectorAll("[data-bio]");
+    var panels = { long: document.getElementById("bio-long"), short: document.getElementById("bio-short") };
+    function show(which, animate) {
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].setAttribute("aria-pressed", String(buttons[i].getAttribute("data-bio") === which));
+      }
+      for (var key in panels) {
+        panels[key].hidden = key !== which;
+        panels[key].classList.remove("show");
+      }
+      if (animate) { void panels[which].offsetWidth; panels[which].classList.add("show"); }
+    }
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener("click", function () {
+        var which = this.getAttribute("data-bio");
+        show(which, true);
+        if (history.replaceState) history.replaceState(null, "", which === "short" ? "#short" : location.pathname);
+      });
+    }
+    show(location.hash === "#short" ? "short" : "long", false);
+  })();
+</script>
 </body>
 </html>

@@ -8,6 +8,29 @@
 <meta name="author" content="Marie Brache">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23008080'/%3E%3Cpath d='M11 8l13 8-13 8z' fill='%23e8bb3f'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/css/style.css">
+<style>
+  /* Works page: RPG dialogue window used as the collection menu */
+  .dialogue.works-window { width: min(780px, 100%); margin: 40px 0 48px; padding: 30px 34px 36px; }
+  .works-window .line { margin: 6px 0 14px; }
+  .work-choices { list-style: none; margin: 0; padding: 0 0 0 1.4em; display: grid; gap: 6px; }
+  .work-choices button {
+    font-family: var(--sans); font-weight: 500; font-size: 1rem; line-height: 1.5;
+    color: #f6f3ff; background: none; border: 0; padding: 2px 0; cursor: pointer; text-align: left;
+  }
+  .work-choices .count { font-weight: 400; color: #b9b1d6; }
+  .work-choices button:hover,
+  .work-choices button:focus-visible,
+  .work-choices button[aria-pressed="true"] { color: var(--gold); }
+  .work-choices button:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .works-window .desc {
+    margin: 20px 0 0; padding-top: 18px;
+    border-top: 1px solid rgba(241, 237, 251, 0.28);
+    font-family: var(--serif); font-size: 1.05rem; line-height: 1.7; color: #f1edfb;
+  }
+  @media (max-width: 560px) {
+    .dialogue.works-window { margin: 32px 0 36px; padding: 28px 20px 34px; }
+  }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -22,14 +45,19 @@
 <main id="main">
 <div class="page-title">
   <h1>Works</h1>
-  <p>Professional art made for departments at the University of Central Florida, and personal art: digital character illustration.</p>
 </div>
 <div class="wrap">
-  <div class="filters" role="group" aria-label="Filter works">
-    <button type="button" class="cursor-item" data-filter="all" aria-pressed="true">All <span class="count"></span></button>
-    <button type="button" class="cursor-item" data-filter="Professional art" aria-pressed="false">Professional art <span class="count"></span></button>
-    <button type="button" class="cursor-item" data-filter="Personal art" aria-pressed="false">Personal art <span class="count"></span></button>
-  </div>
+  <section class="dialogue works-window" aria-label="Choose a collection">
+    <p class="speaker">Marie Brache</p>
+    <p class="line">Which collection would you like to explore?</p>
+    <ul class="work-choices" role="group" aria-label="Filter works">
+      <li><button type="button" class="cursor-item" data-filter="Professional art" aria-pressed="false">Professional art <span class="count"></span></button></li>
+      <li><button type="button" class="cursor-item" data-filter="Personal art" aria-pressed="false">Personal art <span class="count"></span></button></li>
+      <li><button type="button" class="cursor-item" data-filter="all" aria-pressed="true">All works <span class="count"></span></button></li>
+    </ul>
+    <p class="desc" id="collection-desc" aria-live="polite">Everything together: professional design for the University of Central Florida alongside personal character illustration.</p>
+    <span class="more" aria-hidden="true"></span>
+  </section>
   <div class="grid" data-gallery></div>
   <noscript><p>Turn on JavaScript to browse the gallery, or <a href="cv.html">see the full list of works in the CV</a>.</p></noscript>
 </div>
@@ -43,5 +71,24 @@
 </footer>
 <script src="assets/js/works-data.js"></script>
 <script src="assets/js/site.js"></script>
+<script>
+  /* Like an RPG item menu: show a description of the chosen collection.
+     (site.js does the filtering and moves the gold cursor.) */
+  (function () {
+    var desc = document.getElementById("collection-desc");
+    var text = {
+      "Professional art": "Flyers, guides, booklets and book covers designed for departments at the University of Central Florida, from 2017 to 2025.",
+      "Personal art": "Digital character illustration: portraits, scenes and a recurring mint-green ghost.",
+      "all": "Everything together: professional design for the University of Central Florida alongside personal character illustration."
+    };
+    var buttons = document.querySelectorAll(".work-choices [data-filter]");
+    function update() {
+      var on = document.querySelector('.work-choices [aria-pressed="true"]');
+      if (on) desc.textContent = text[on.getAttribute("data-filter")];
+    }
+    for (var i = 0; i < buttons.length; i++) buttons[i].addEventListener("click", update);
+    update();
+  })();
+</script>
 </body>
 </html>

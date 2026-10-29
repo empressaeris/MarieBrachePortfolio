@@ -548,7 +548,7 @@ window.WORKS = [
         "src": "assets/img/works/character-study-08/01.jpg",
         "w": 480,
         "h": 271,
-        "alt": "Digital illustration of a blonde woman in a green top shouting in surprise, with a thought bubble showing her hugging a black-and-white plush toy"
+        "alt": "Digital illustration of a little blonde girl in a green top shouting in surprise, with a thought bubble showing her hugging a black-and-white plush toy"
       }
     ]
   },
@@ -563,13 +563,13 @@ window.WORKS = [
     "client": "Personal work",
     "featured": false,
     "fit": "cover",
-    "description": "A recurring mint-green ghost character, drawn with loose, wispy outlines that get a lot of personality out of very few lines.",
+    "description": "Mint-green ghost character, drawn with loose, wispy outlines that get a lot of personality out of very few lines.",
     "images": [
       {
         "src": "assets/img/works/character-study-09/01.jpg",
         "w": 1241,
         "h": 1294,
-        "alt": "Digital illustration of a mint-green ghost with crossed-out eyes and a single tear"
+        "alt": "Mint-green ghost defeated with his crossed-out eyes crying a singular tear."
       }
     ]
   },
@@ -584,7 +584,7 @@ window.WORKS = [
     "client": "Personal work",
     "featured": false,
     "fit": "cover",
-    "description": "The mint-green ghost returns, this time as a companion, beside a serene figure in a deep blue gown.",
+    "description": "Mint-green ghost beside a serene figure in a deep blue gown.",
     "images": [
       {
         "src": "assets/img/works/character-study-10/01.jpg",
